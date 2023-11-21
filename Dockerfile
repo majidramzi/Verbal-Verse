@@ -1,14 +1,17 @@
-# Use the official PHP image as a base image
+# Use a base image with PHP and Apache
 FROM php:7.4-apache
 
-# Set the working directory inside the container
+# Install eSpeak
+RUN apt-get update && apt-get install -y espeak
+
+# Set the working directory
 WORKDIR /var/www/html
 
-# Copy the contents of your PHP project to the container
+# Copy your PHP files into the container
 COPY . /var/www/html/
 
 # Expose port 80 for Apache
 EXPOSE 80
 
-# Start the Apache web server
+# Start Apache
 CMD ["apache2-foreground"]
